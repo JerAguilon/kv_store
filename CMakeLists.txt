@@ -13,6 +13,10 @@ cmake_minimum_required(VERSION 3.14)
 project(CPP_BOILERPLATE VERSION 1.2.3.4 LANGUAGES CXX)
 
 
+# For COC on vim
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+
 # Options: Things you can set via commandline options to cmake (e.g. -DENABLE_LTO=[ON|OFF])
 option(ENABLE_WARNINGS_SETTINGS "Allow target_set_warnings to add flags and defines.
                                  Set this to OFF if you want to provide your own warning parameters." ON)
@@ -39,6 +43,8 @@ find_lto(CXX)
 # --------------------------------------------------------------------------------
 set(SOURCES          # All .cpp files in src/
     src/example.cpp
+    src/KVStore.cpp
+    src/Database.cpp
 )
 set(TESTFILES        # All .cpp files in tests/
     tests/main.cpp
@@ -67,6 +73,11 @@ add_executable(main app/main.cpp)   # Name of exec. and location of file.
 target_link_libraries(main PRIVATE ${LIBRARY_NAME})  # Link the executable to library (if it uses it).
 target_set_warnings(main ENABLE ALL AS_ERROR ALL DISABLE Annoying) # Set warnings (if needed).
 target_enable_lto(main optimized)  # enable link-time-optimization if available for non-debug configurations
+
+add_executable(cli app/cli.cpp)   # Name of exec. and location of file.
+target_link_libraries(cli PRIVATE ${LIBRARY_NAME})  # Link the executable to library (if it uses it).
+target_set_warnings(cli ENABLE ALL AS_ERROR ALL DISABLE Annoying) # Set warnings (if needed).
+target_enable_lto(cli optimized)  # enable link-time-optimization if available for non-debug configurations
 
 # Set the properties you require, e.g. what C++ standard to use. Here applied to library and main (change as needed).
 set_target_properties(

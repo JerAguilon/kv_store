@@ -11,6 +11,7 @@
 
 #include "exampleConfig.h"
 #include "example.h"
+#include "KVStore.h"
 
 /*
  * Simple main program that demontrates how access
