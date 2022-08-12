@@ -13,6 +13,7 @@ class KVStore {
         int get(int);
 
         static Database createEmptyDB(const std::string& dbname);
+        static Database loadDB(const std::string& dbname);
 
     private:
         std::unordered_map<int, int> map;
